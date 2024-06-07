@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--    ====================Form view of vehicle facility==========-->
+    <record id="view_vehicle_facility_form" model="ir.ui.view">
+        <field name="name">view.vehicle.facility.form</field>
+        <field name="model">hotel.vehicle.facility</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="code"/>
+                        <field name="name"/>
+                        <field name="facility_id"/>
+                        <field name="currency_id"/>
+                        <field name="charges"/>
+                        <field name="persons"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--    =================Tree view of the vehicle facility ======-->
+    <record id="view_vehicle_facility_tree" model="ir.ui.view">
+        <field name="name">view.vehicle.facility.tree</field>
+        <field name="model">hotel.vehicle.facility</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="facility_id"/>
+                <field name="charges"/>
+                <field name="persons"/>
+            </tree>
+        </field>
+    </record>
+    <!--    ================Action of the vehicle facility==========-->
+    <record id="action_vehicle_facility" model="ir.actions.act_window">
+        <field name="name">Vehicle Facility</field>
+        <field name="res_model">hotel.vehicle.facility</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!--    =============Menu of the vehicle facility==============-->
+    <menuitem id="menu_vehicle_facility" action="action_vehicle_facility" parent="hotel.menu_configuration"/>
+</odoo>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--       Form View of rooms-->
+    <record id="view_room_form" model="ir.ui.view">
+        <field name="name">view.room.form</field>
+        <field name="model">hotel.room</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="status" widget="statusbar" options="{'clickable':1}"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="room_code"/>
+                        <!--                        <field name="hotel_id"/>-->
+                        <field name="currency_id"/>
+                        <field name="rent"/>
+                        <field name="no_of_persons"/>
+                        <field name="taxes"/>
+                        <field name="room_types_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!--    ================Tree view of rooms=================-->
+    <record id="view_room_tree" model="ir.ui.view">
+        <field name="name">view.room.tree</field>
+        <field name="model">hotel.room</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="room_code"/>
+                <field name="name"/>
+                <!--                <field name="hotel_id"/>-->
+                <field name="currency_id" invisible="1"/>
+                <field name="rent"/>
+                <field name="no_of_persons"/>
+                <field name="taxes"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--    Action of the room-->
+    <record id="action_room" model="ir.actions.act_window">
+        <field name="name">Rooms</field>
+        <field name="res_model">hotel.room</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <!--=====================Search view of the rooms============-->
+    <record id="view_room_search" model="ir.ui.view">
+        <field name="name">view.room.search</field>
+        <field name="model">hotel.room</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="room_code"/>
+                <field name="room_types_id"/>
+            </search>
+        </field>
+    </record>
+
+
+    <!--    *************************Menu for rooms ********************************************-->
+    <menuitem id="menu_rooms" action="action_room" parent="hotel.menu_configuration"/>
+
+
+</odoo>

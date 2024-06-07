@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<!--    ================Form view============-->
+    <record id="view_products_form" model="ir.ui.view">
+        <field name="name">view.products.form</field>
+        <field name="model">hotel.products</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="code"/>
+                        <field name="name"/>
+                        <field name="company_id"/>
+                        <field name="product_category_id"/>
+                        <field name="currency_id"/>
+                        <field name="price" />
+                        <field name="taxes"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+<!--    ==================Tree view=====================-->
+    <record id="view_product_tree" model="ir.ui.view">
+        <field name="name">view.product.tree</field>
+        <field name="model">hotel.products</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="product_category_id"/>
+                <field name="currency_id"/>
+                <field name="price" avg="Average of price"/>
+                <field name="taxes"/>
+            </tree>
+        </field>
+    </record>
+
+<!--    ===============Action of products==========-->
+    <record id="action_products" model="ir.actions.act_window">
+        <field name="name">Food Products</field>
+        <field name="res_model">hotel.products</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+<!--    ==================Menu of the products=======-->
+    <menuitem id="menu_product" action="action_products" parent="hotel.menu_configuration"/>
+</odoo>
+
+

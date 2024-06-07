@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!--    Form View-->
+    <record id="view_booking_form" model="ir.ui.view">
+        <field name="name">view.booking.form</field>
+        <field name="model">hotel.booking</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <h1>Bookings of STARLINE DIVINE!!</h1>
+                    <field name="state" widget="statusbar" options="{'clickable':1}"/>
+                    <button name="action_button" string="Click me" type="object"
+                            help="A message will be printed in the log" class="oe_highlight"/>
+                    <button name="print_bookings" string="Print" type="object" class="oe_highlight"/>
+                    <button name="create_rec" string="Create" type="object" class="oe_highlight"/>
+                    <button name="browse_rec" string="Browse" type="object" class="oe_highlight"/>
+                    <button name="update_rec" string="Update" type="object" class="oe_highlight"/>
+
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Not active" bg_color="bg-danger" invisible="active"/>
+                    <widget name="web_ribbon" title="Active" bg_color="bg-success" invisible="not active"/>
+                    <div class="row">
+                        <div class="col col-md-6">
+                            <h1>
+                                <group>
+                                    <!--                                    <field name="hotel_ids"/>-->
+                                    <field name="booking_id" string="Booking Reference"
+                                           placeholder="Enter booking id"/>
+                                </group>
+                            </h1>
+                            <group>
+                                <field name="company_id"/>
+                                <field name="guest_name" placeholder="Enter Guest Name" required="1"/>
+                                <field name="guest_email" placeholder="Enter Guest's Email id" widget="email"/>
+                                <field name="active" invisible="1"/>
+                                <field name="sequence"/>
+                                <field name="guest_age"/>
+                                <field name="guest_gender" widget="radio"/>
+                                <field name="file_name" invisible="1"/>
+                                <field name="guest_id_doc" filename="file_name"/>
+                                <!--                                <field name="website" widget="url"/>-->
+                                <!--                                <field name="guest_priority" widget="priority"/>-->
+                                <!--                                <field name="sign_in" widget="float_time"/>-->
+                                <!--                                <field name="password" password="#"/>-->
+                            </group>
+                        </div>
+                        <div class="col col-md-6">
+                            <group>
+                                <field name="ref"/>
+<!--                                <field name="room_type_id"/>-->
+                                <field name="date_of_booking"/>
+                                <field name="days_book_for" required="guest_name" readonly="not guest_name"/>
+                                <field name="check_in"/>
+                                <field name="check_out"/>
+                                <!--                                <field name="room_type_ids" widget="many2many_tags"/>-->
+                                <field name="facilities_ids" widget="many2many_checkboxes"/>
+                                <field name="is_food" invisible="0"/>
+                                <field name="is_transport" invisible="0"/>
+                            </group>
+                        </div>
+                    </div>
+                    <notebook>
+                        <page name="pg_folio" string="Folio">
+                            <field name="booking_folio_ids"/>
+                        </page>
+                        <!--                        <page name="pg_facilities" string="Facilities">-->
+                        <!--                                                </page>-->
+                        <page name="pg_Order" string="Food Order" invisible="is_food == False">
+                            <!--                            <label for="food_category_ids"/>-->
+                            <!--                            <field name="food_category_ids" widget="many2many_tags"/>-->
+                            <!--                            <field name="food_products_ids"/>-->
+                            <field name="booking_food_order_ids"/>
+                        </page>
+                        <page name="pg_transport" string="Transportation" invisible="is_transport == False">
+                            <!--                            <label for="veh_facility_id"/>-->
+                            <field name="booking_vehicle_facility_ids"/>
+                        </page>
+                    </notebook>
+                    <!--                    <separator string="Additional Info of Guests"/>-->
+                    <!--                    <notebook>-->
+                    <!--                        <page name="pg_guest_info" string="Guest Info">-->
+                    <!--                            <field name="guest_info" placeholder="enter guest info"/>-->
+                    <!--                        </page>-->
+                    <!--                        <page name="pg_des" string="Description">-->
+                    <!--                            <field name="description" placeholder="enter special requirements of guests"/>-->
+                    <!--                        </page>-->
+                    <!--                    </notebook>-->
+                    <br/>
+                    <separator string="Account"/>
+                    <group>
+                        <!--                        <field name="per_day_cost"/>-->
+                        <field name="mode_of_payment" placeholder="Select Payment Mode"/>
+                        <!--                        <field name="taxes"/>-->
+                        <field name="currency_id"/>
+                        <field name="total"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <h1>Designed by HY....</h1>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!--    ========================Tree View ===========================-->
+    <record id="view_booking_tree" model="ir.ui.view">
+        <field name="name">view.hotel.booking.tree</field>
+        <field name="model">hotel.booking</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" widget="handle"/>
+                <field name="booking_id"/>
+                <field name="guest_name"/>
+                <field name="active" widget="boolean_toggle"/>
+                <field name="check_in"/>
+                <field name="check_out"/>
+                <field name="state"/>
+                <field name="mode_of_payment"/>
+                <field name="currency_id"/>
+                <field name="total" avg="Avg of total"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--    ==============Search View ========================-->
+    <record id="view_booking_search" model="ir.ui.view">
+        <field name="name">view.booking.search</field>
+        <field name="model">hotel.booking</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="guest_name"/>
+                <field name="date_of_booking"/>
+                <field name="mode_of_payment"/>
+                <field name="state"/>
+                <!--                <field name="room_type_ids"/>-->
+                <!--=====================Adding filter =================-->
+                <filter name="fil_active_booking" string="Active booking" domain="[('active','=',True)]"/>
+                <!--                Adding group by in search view-->
+                <filter name="grp_by_mode_of_payment" string="Mode of Payment"
+                        context="{'group_by':'mode_of_payment'}"/>
+            </search>
+        </field>
+    </record>
+    <record id="action_hotel" model="ir.actions.act_window">
+        <field name="name">Bookings</field>
+        <field name="res_model">hotel.booking</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_state':'checkin','search_default_date_of_booking':'5/7/2024'}</field>
+    </record>
+    <menuitem id="menu_hotel" name="Hotel"/>
+    <menuitem id="menu_booking" name="Reservation" parent="menu_hotel"/>
+    <menuitem id="menu_configuration" name="Configuration" parent="menu_hotel"/>
+    <menuitem id="menu_hotel_booking" action="action_hotel" parent="menu_booking"/>
+</odoo>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!--    =================Form view of booking room lines=======-->
+    <record id="view_hotel_booking_room_lines_form" model="ir.ui.view">
+        <field name="name">view.hotel.booking.room.lines.form</field>
+        <field name="model">hotel.booking.room</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="room_type_id"/>
+                        <field name="rooms_id"/>
+                        <field name="no_of_persons"/>
+                        <field name="currency_id" invisible="1"/>
+                        <field name="rent"/>
+                        <field name="taxes"/>
+                        <field name="sub_total"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--    ==================Tree view of booking room lines==========-->
+    <record id="view_hotel_booking_room_lines_tree" model="ir.ui.view">
+        <field name="name">view.hotel.booking.room.lines.tree</field>
+        <field name="model">hotel.booking.room</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="room_type_id"/>
+                <field name="rooms_id"/>
+                <field name="no_of_persons"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="rent"/>
+                <field name="taxes"/>
+                <field name="sub_total"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--    ======================= Form view of the food order ============== -->
+    <record id="view_hotel_booking_food_lines_form" model="ir.ui.view">
+        <field name="name">view.hotel.booking.food.lines.form</field>
+        <field name="model">hotel.booking.food</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="food_category_id"/>
+                        <field name="food_products_id"/>
+                        <field name="price"/>
+                        <field name="quantity"/>
+                        <field name="taxes"/>
+                        <field name="currency_id" invisible="1"/>
+<!--                        <field name="facility_id"/>-->
+                        <field name="sub_total"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--        =================Tree view of booking food order===========-->
+    <record id="view_hotel_booking_food_lines_tree" model="ir.ui.view">
+        <field name="name">view.hotel.booking.food.lines.tree</field>
+        <field name="model">hotel.booking.food</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="food_category_id"/>
+                <field name="food_products_id"/>
+                <field name="price"/>
+                <field name="quantity"/>
+                <field name="taxes"/>
+                <field name="currency_id" invisible="1"/>
+<!--                <field name="facility_id"/>-->
+                <field name="sub_total"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--    ==============Form view of booking vehicle facility=======-->
+    <record id="view_hotel_booking_vehicle_lines_form" model="ir.ui.view">
+        <field name="name">view.hotel.booking.vehicle.lines.form</field>
+        <field name="model">hotel.booking.vehicle</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="vehicle_id"/>
+                        <field name="currency_id" invisible="1"/>
+                        <field name="persons"/>
+<!--                        <field name="facility_id"/>-->
+                        <field name="charges"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!--    ================Tree view of booking vehicle facility===========-->
+    <record id="view_hotel_booking_vehicle_lines_tree" model="ir.ui.view">
+        <field name="name">view.hotel.booking.vehicle.lines.tree</field>
+        <field name="model">hotel.booking.vehicle</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="vehicle_id"/>
+                <field name="currency_id" invisible="1"/>
+                <field name="persons"/>
+<!--                <field name="facility_id"/>-->
+                <field name="charges"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

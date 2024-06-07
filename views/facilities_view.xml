@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<!--    ==============Form view of facilities =========-->
+    <record id="view_hotel_facilities_form" model="ir.ui.view">
+        <field name="name">view.hotel.facilities.form</field>
+        <field name="model">hotel.facilities</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="code"/>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+<!--    ==============Tree view of facilities=========-->
+    <record id="view_hotel_facilities_tree" model="ir.ui.view">
+        <field name="name">view.hotel.facilities.tree</field>
+        <field name="model">hotel.facilities</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+<!--    ==================Action of the facilities==============-->
+    <record id="action_hotel_facilities" model="ir.actions.act_window">
+        <field name="name">Facilities</field>
+        <field name="res_model">hotel.facilities</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+<!--    ======================Menu of the facilities=============-->
+    <menuitem id="menu_hotel_facilities" action="action_hotel_facilities" parent="hotel.menu_configuration"/>
+</odoo>
+
+
+<!--&lt;!&ndash;    ==============Form view of booking facilities =========&ndash;&gt;-->
+<!--    <record id="view_hotel_booking_facilities_form" model="ir.ui.view">-->
+<!--        <field name="name">view.hotel.booking.facilities.form</field>-->
+<!--        <field name="model">hotel.booking.facilities</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <form>-->
+<!--                <sheet>-->
+<!--                    <group>-->
+<!--                        <field name="facilities_id"/>-->
+<!--                    </group>-->
+<!--                </sheet>-->
+<!--            </form>-->
+<!--        </field>-->
+<!--    </record>-->
+<!--&lt;!&ndash;    ==============Tree view of booking facilities=========&ndash;&gt;-->
+<!--    <record id="view_hotel_booking_facilities_tree" model="ir.ui.view">-->
+<!--        <field name="name">view.hotel.booking.facilities.tree</field>-->
+<!--        <field name="model">hotel.booking.facilities</field>-->
+<!--        <field name="arch" type="xml">-->
+<!--            <tree>-->
+<!--                <field name="facilities_id"/>-->
+<!--            </tree>-->
+<!--        </field>-->
+<!--    </record>-->
+

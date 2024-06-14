@@ -1,5 +1,5 @@
 {
-    'name':'Hotel Management System',
+    'name':'Hotel Management System1',
     'description':'This module is used for booking hotel rooms',
     'author':'Harsha',
     'website':'https://www.stardivine.com',
@@ -8,10 +8,10 @@
     'data': [
              'security/hotel_security.xml',
              'security/ir.model.access.csv',
+             'views/room_view.xml',
              'views/booking_view.xml',
              'views/room_type_view.xml',
              'views/hotel_view.xml',
-             'views/room_view.xml',
              'views/product_categories_view.xml',
              'views/product_view.xml',
              'views/view_vehicle_facility.xml',

@@ -34,7 +34,7 @@
     </record>
 
 <!--    ======================Menu of the facilities=============-->
-    <menuitem id="menu_hotel_facilities" action="action_hotel_facilities" parent="hotel.menu_configuration"/>
+    <menuitem id="menu_hotel_facilities" action="action_hotel_facilities" parent="hotelmanagement.menu_configuration"/>
 </odoo>
 
 

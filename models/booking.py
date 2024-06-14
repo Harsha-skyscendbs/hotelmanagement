@@ -1,6 +1,6 @@
 import datetime
 
-from odoo import models, fields, api, Command
+from odoo import models, fields, api, Command,_
 from datetime import timedelta
 
 
@@ -78,7 +78,6 @@ class Hotel(models.Model):
         @param:object pointer/ recordset
         """
         print('compute of total charges', self)
-
         # #************** filtered() ***********
         # #Takes only two postional arguments
         # active_records = self.filtered('active')
@@ -140,7 +139,7 @@ class Hotel(models.Model):
             # print('Ensure one', booking.ensure_one())
             # print('type of Ensure one', type(booking.ensure_one()))
             #      # returns class 'odoo.api.hotel.booking'
-            # print('Meta data ', booking.get_metadata())
+            # print('Meta data', booking.get_metadata())
             # print('type of metadta',type(booking.get_metadata()))
             total_charges = 0.0
             # for rooms in booking.rooms_ids:
@@ -183,14 +182,14 @@ class Hotel(models.Model):
             'days_book_for': 3,
             'guest_age': 25,
             'guest_gender': 'female',
-            'booking_folio_ids':[
+            'booking_folio_ids': [
                 (0, 0, {
                     'room_type_id': 2,
                     'rooms_id': 1
                 }),
                 (Command.create({
                     'room_type_id': 3,
-                    'rooms_id':2,
+                    'rooms_id': 2,
                 }))
             ],
             'facilities_ids': [
@@ -200,7 +199,7 @@ class Hotel(models.Model):
         }
         vals_lst = [vals_1]
         new_rec = self.create(vals_lst)
-        print('New rec created..',new_rec)
+        print('New rec created..', new_rec)
 
     def browse_rec(self):
         """
@@ -254,7 +253,76 @@ class Hotel(models.Model):
         }
         res = self.write(vals)
         print("Updating records---------",res)
-        
+
+    def copy_rec(self):
+        default = {
+            'guest_name': self.guest_name + '(copy)',
+            'facilities_ids': self.facilities_ids
+        }
+        new_rec = self.copy(default=default)
+        print('Created copied record------', new_rec)
+
+    def delete_rec(self):
+        del_rec = self.unlink()
+        print("Deleting records-------", del_rec)
+
+    def search_rec(self):
+        all_bookings = self.search([])
+        print("All bookings", all_bookings)
+        male_guest = self.search([('guest_gender', '=', 'male')])
+        print("Male guest---------", male_guest)
+        offset_3_bookings = self.search([], offset=3)
+        print("Skipping 3 records-----", offset_3_bookings)
+        limit_4_bookings = self.search([], limit=4)
+        print("Limit 4 bookings--------", limit_4_bookings)
+        off_2_limit_4_bookings = self.search([], offset=2, limit=4)
+        print("Skip 2 rec and Max 4 records -----", off_2_limit_4_bookings)
+        sort_by_name = self.search([], order='guest_name')
+        print("Sort by name asc------", sort_by_name)
+        sort_off_lim = self.search([], offset=2, limit=4, order='guest_name desc')
+        print("Sorted records in desc and skipped by 2 and max 4 rec",sort_off_lim)
+        no_female_guest = self.search([], count=True)
+        print("No of female guests--------", no_female_guest)
+
+        #search_count returns integer
+        total_guests = self.search_count([])
+        print("Total guests------", total_guests)
+
+        #search_read  returns list of dict
+        bookings_list = self.search_read(fields=['guest_name', 'guest_age', 'facilities_ids', 'booking_folio_ids', 'currency_id'])
+        print('Booking list------------', bookings_list)
+    @api.model
+    def default_get(self, fields_list):
+        """
+        Overridden default_get method to add additional default facilities in every bookings
+        --------------------------------------------------------------
+        @param self: object pointer
+        @param fields_list: List of fields having default values
+        """
+        print("Fields list-----", fields_list)
+        res = super().default_get(fields_list=fields_list)
+        print("Result------", res)
+        res.update({'currency_id': 1})
+        # res.update({'facilities_ids': })
+        # fac_ids = self.env['hotel.facilities'].browse(3).ids
+        # print("facilities_ids----", fac_ids)
+        # res['facilities_ids'] = [(6, 0, fac_ids)]
+        res['facilities_ids'] = [(6, 0, {3})]
+        print("Updated res------", res)
+        return res
+
+    @api.model
+    def search(self, args, offset=None, limit=None, order=False, count=False):
+        """Overridden Search method to fetch archived bookings as well
+            @param self :object pointer /recordset
+            @param args : Domain if given
+            @param offset: To skip the no of records
+            @param limit : to limit the records
+            @param order: to sort the records based on the field mentioned
+            @param count : True/False
+        """
+        args += ['|', ('active', '=', True), ('active', '=', 'False')]
+        return super().search(args, offset=offset, limit=limit, order=order, count=count)
 
     @api.depends('check_in','days_book_for')
     def _cal_checkout_date(self):
@@ -263,7 +331,7 @@ class Hotel(models.Model):
         --------------------------------------------------------
         @param:object pointer/ recordset
         """
-        print('compute of checkout date',self)
+        print('compute of checkout date', self)
         for booking in self:
             booking.check_out = booking.check_in + timedelta(days=booking.days_book_for)
 

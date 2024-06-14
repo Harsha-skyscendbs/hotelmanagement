@@ -50,5 +50,5 @@
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem id="menu_hotel_config" action="menu_hotel_action" parent="hotel.menu_configuration"/>
+    <menuitem id="menu_hotel_config" action="menu_hotel_action" parent="hotelmanagement.menu_configuration"/>
 </odoo>

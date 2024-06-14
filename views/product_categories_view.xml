@@ -40,5 +40,5 @@
     </record>
 
     <!--    =================menu of the product Category======-->
-    <menuitem id="menu_productcategory" action="action_productcategory" parent="hotel.menu_configuration"/>
+    <menuitem id="menu_productcategory" action="action_productcategory" parent="hotelmanagement.menu_configuration"/>
 </odoo>

@@ -45,7 +45,7 @@
     </record>
 
 <!--    ==================Menu of the products=======-->
-    <menuitem id="menu_product" action="action_products" parent="hotel.menu_configuration"/>
+    <menuitem id="menu_product" action="action_products" parent="hotelmanagement.menu_configuration"/>
 </odoo>
 
 

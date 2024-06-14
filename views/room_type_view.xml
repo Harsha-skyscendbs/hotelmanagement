@@ -14,7 +14,7 @@
                     <div name="button_box" class="oe_button_box">
                         <button class="oe_stat_button"
                                 type="action"
-                                name="%(action_room)d"
+                                name="%(hotelmanagement.action_room)d"
                                 context="{'default_room_types_id':active_id,'search_default_room_types_id':active_id}"
                                 string="Add Rooms"/>
                     </div>
@@ -48,7 +48,7 @@
     </record>
 
 <!--    *************************Menu for room type ********************************************-->
-    <menuitem id="menu_roomtype" action="action_roomtype" parent="hotel.menu_configuration"/>
+    <menuitem id="menu_roomtype" action="action_roomtype" parent="hotelmanagement.menu_configuration"/>
 
 
 </odoo>

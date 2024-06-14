@@ -43,5 +43,5 @@
     </record>
 
     <!--    =============Menu of the vehicle facility==============-->
-    <menuitem id="menu_vehicle_facility" action="action_vehicle_facility" parent="hotel.menu_configuration"/>
+    <menuitem id="menu_vehicle_facility" action="action_vehicle_facility" parent="hotelmanagement.menu_configuration"/>
 </odoo>

@@ -4,6 +4,7 @@ from odoo import fields, models, api
 class BookingRoom(models.Model):
     _name = 'hotel.booking.room'
     _description = 'This model contains information of the rooms folio'
+    _rec_name = 'rooms_id'
 
     booking_id = fields.Many2one('hotel.booking', 'booking id')
     room_type_id = fields.Many2one('hotel.roomtype', string='Room Types')

@@ -63,7 +63,7 @@
 
 
     <!--    *************************Menu for rooms ********************************************-->
-    <menuitem id="menu_rooms" action="action_room" parent="hotel.menu_configuration"/>
+    <menuitem id="menu_rooms" action="action_room" parent="hotelmanagement.menu_configuration"/>
 
 
 </odoo>

@@ -1,6 +1,6 @@
 import datetime
 
-from odoo import models, fields, api, Command,_
+from odoo import models, fields, api, Command, _
 from datetime import timedelta
 from odoo.exceptions import ValidationError
 
@@ -19,7 +19,7 @@ class Hotel(models.Model):
     guest_name = fields.Char(string="Guest Name", help='It is used to enter guest name', index=True)
     guest_email = fields.Char(string="Guest Email", help="You can enter guest's email id")
     guest_age = fields.Integer(string='Guest Age', help='Enter the age of the guest')
-    guest_gender = fields.Selection(selection=[('male', 'Male'),('female', 'Female')], string='Gender')
+    guest_gender = fields.Selection(selection=[('male', 'Male'), ('female', 'Female')], string='Gender')
     # room_availability=fields.Boolean(string="Is room Available ?",help='This is need to be checked out if room not available')
     date_of_booking = fields.Date(string="Booking Date", default=fields.Date.today(),
                                   help='It is used to enter booking date')
@@ -52,7 +52,7 @@ class Hotel(models.Model):
     #                                      domain="[('product_category_id','=',food_category_ids)]")
     facilities_ids = fields.Many2many('hotel.facilities', 'book_fac_rel', 'booking_id', 'facility_id',
                                       string='Facilities')
-    is_food = fields.Boolean(string="Is food" )  #,compute="_show_tab"  ,default=False
+    is_food = fields.Boolean(string="Is food")  # ,compute="_show_tab"  ,default=False
     is_transport = fields.Boolean(string="Is transport", )  # compute="_show_tab"  default=False,
 
     booking_folio_ids = fields.One2many('hotel.booking.room', 'booking_id', 'Folio')
@@ -65,7 +65,7 @@ class Hotel(models.Model):
     currency_id = fields.Many2one('res.currency', 'Currency')
     total = fields.Monetary(currency_field='currency_id',
                             string="Total", help='it displays final amount',
-                            digits=(16, 3), compute='_calc_total_charges',)
+                            digits=(16, 3), compute='_calc_total_charges', )
     guest_id_doc = fields.Binary('Guest Doc')
     file_name = fields.Char('Doc name')
     state = fields.Selection([('draft', 'Draft'),
@@ -157,7 +157,8 @@ class Hotel(models.Model):
 
     def print_bookings(self):
         """
-        This method gets triggered when button is called..and it shows the usage of button and some special objects.
+        This method gets triggered when button is called. and it shows the usage of button and some special objects.
+        --------------------------------------------------------------------------------------------------
         @param:object pointer/ recordset
         """
         print('Self', self)
@@ -167,16 +168,17 @@ class Hotel(models.Model):
         print('User id', self.env.uid)
         print('User', self.env.user)
         print('Context', self.env.context)
-        print('Company',self.env.company)
+        print('Company', self.env.company)
         print('Companies', self.env.companies)
         print('Language', self.env.lang)
         print('Ref', self.env.ref('hotel.view_booking_form'))
         print('Booking object', self.env['hotel.booking'])
         book_obj = self.env['hotel.booking']
-        print('Booking obj', book_obj.guest_name) # returns false
+        print('Booking obj', book_obj.guest_name)
 
     def create_rec(self):
         """ This method triggeres when button is clicked and then record will be created
+        --------------------------------------------------------------------------------
         @param:object pointer/ recordset
         """
         vals_1 = {
@@ -196,7 +198,7 @@ class Hotel(models.Model):
                 }))
             ],
             'facilities_ids': [
-                (4,2),
+                (4, 2),
                 Command.link(3)
             ]
         }
@@ -207,6 +209,7 @@ class Hotel(models.Model):
     def browse_rec(self):
         """
         This is button's method used to demonstrate browse method.
+        -------------------------------------------------------------------
         @param self : object pointer / recordset
         """
         booking_rec = self.browse(20)
@@ -214,13 +217,13 @@ class Hotel(models.Model):
         # booking_rec = self.browse(21).booking_id # record doesn't exist in database
         print("\n Booking record-------------", booking_rec)
         booking_dict = booking_rec.read(['booking_id', 'guest_name', 'guest_email', 'guest_age', 'currency_id',
-                                         'facilities_ids','booking_folio_ids'], load='_classic_read')
+                                         'facilities_ids', 'booking_folio_ids'], load='_classic_read')
         print("\n Booking dict --------------", booking_dict)
         print("\n Currency rec------", booking_dict[0]['currency_id'])
         print("\n Facilities ids-------", booking_dict[0]['facilities_ids'])
         print("\n Booking folio ids-------", booking_dict[0]['booking_folio_ids'])
         bookings = self.browse([1, 18])
-        print("Bookings-----",bookings)
+        print("Bookings-----", bookings)
         facilities_mapped = self.env['hotel.facilities'].browse([3, 2]).mapped('name')
         print('facilities_mapped----', facilities_mapped)
         facilities = self.env['hotel.facilities'].browse([3, 2]).read(['code', 'name'])
@@ -229,6 +232,7 @@ class Hotel(models.Model):
     def update_rec(self):
         """
         This is button's method used to demonstrate  write method.
+        -------------------------------------------------------------------
         @param self: object pointer / recordset
         """
         vals = {
@@ -242,10 +246,10 @@ class Hotel(models.Model):
                 # (5, 0, 0),
                 # (Command.clear()),
                 # (2,2),
-                (3,4),
-                #(Command.unlink(4)),
-                (4,4)
-                #(Command.link(4)),
+                (3, 4),
+                # (Command.unlink(4)),
+                (4, 4)
+                # (Command.link(4)),
             ],
             'booking_folio_ids': [
                 # (0, 8, {'room_type_id': 2})
@@ -255,9 +259,14 @@ class Hotel(models.Model):
 
         }
         res = self.write(vals)
-        print("Updating records---------",res)
+        print("Updating records---------", res)
 
     def copy_rec(self):
+        """
+        This is object type button's method used to demonstrate copy method to copy the record.
+        --------------------------------------------------------------------------
+        @param self: object pointer / recordset
+        """
         default = {
             'guest_name': self.guest_name + '(copy)',
             'facilities_ids': self.facilities_ids
@@ -266,10 +275,20 @@ class Hotel(models.Model):
         print('Created copied record------', new_rec)
 
     def delete_rec(self):
+        """
+        This is button's method used to delete record.
+        --------------------------------------------------------------------------
+        @param self: object pointer / recordset
+        """
         del_rec = self.unlink()
         print("Deleting records-------", del_rec)
 
     def search_rec(self):
+        """
+        This is button's method used to demonstrate search method.
+        --------------------------------------------------------------------------
+        @param self: object pointer / recordset
+        """
         all_bookings = self.search([])
         print("All bookings", all_bookings)
         male_guest = self.search([('guest_gender', '=', 'male')])
@@ -283,17 +302,19 @@ class Hotel(models.Model):
         sort_by_name = self.search([], order='guest_name')
         print("Sort by name asc------", sort_by_name)
         sort_off_lim = self.search([], offset=2, limit=4, order='guest_name desc')
-        print("Sorted records in desc and skipped by 2 and max 4 rec",sort_off_lim)
+        print("Sorted records in desc and skipped by 2 and max 4 rec", sort_off_lim)
         no_female_guest = self.search([], count=True)
         print("No of female guests--------", no_female_guest)
 
-        #search_count returns integer
+        # search_count returns integer
         total_guests = self.search_count([])
         print("Total guests------", total_guests)
 
-        #search_read  returns list of dict
-        bookings_list = self.search_read(fields=['guest_name', 'guest_age', 'facilities_ids', 'booking_folio_ids', 'currency_id'])
+        # search_read  returns list of dict
+        bookings_list = self.search_read(
+            fields=['guest_name', 'guest_age', 'facilities_ids', 'booking_folio_ids', 'currency_id'])
         print('Booking list------------', bookings_list)
+
     @api.model
     def default_get(self, fields_list):
         """
@@ -327,7 +348,7 @@ class Hotel(models.Model):
         args += ['|', ('active', '=', True), ('active', '=', 'False')]
         return super().search(args, offset=offset, limit=limit, order=order, count=count)
 
-    @api.depends('check_in','days_book_for')
+    @api.depends('check_in', 'days_book_for')
     def _cal_checkout_date(self):
         """
         This method calculates the checkout date of the customer
@@ -391,20 +412,41 @@ class Hotel(models.Model):
 
     @api.onchange('facilities_ids')
     def _onchange_facilities_ids(self):
+        """
+        This method displays/hide the tabs of selected facilities and even
+        deletes the records of facilities which not been selected.
+        --------------------------------------------------------------------------
+        @param self:object pointer / recordset
+        """
+        food_show = False
+        transportation_show = False
         for hotel_booking in self:
-            food_show = False
-            transportation_show = False
             for facility in hotel_booking.facilities_ids:
                 if facility.name == 'Food':
                     food_show = True
                 if facility.name == 'Transportation':
                     transportation_show = True
         if not self.is_food:
-            self.booking_food_order_ids.unlink()
             # food_show = False
+            for food in self.booking_food_order_ids:
+                print("====food =====", food.id)
+                val = {
+                    'booking_food_order_ids': [(
+                        Command.delete(food.id)
+                    )]
+                }
+                res = self.write(val)
+                print("Res ----", res)
 
         if not self.is_transport:
-            self.booking_vehicle_facility_ids.unlink()
+            for transport in self.booking_vehicle_facility_ids:
+                print("Vehicle------", transport.id)
+                val = {
+                    'booking_vehicle_facility_ids': [(
+                        Command.delete(transport.id)
+                    )]
+                }
+                print('Deleted vehicle fac', self.write(val))
             # transportation_show = False
 
         self.is_food = food_show
@@ -438,9 +480,6 @@ class Hotel(models.Model):
 
     # hotel_booking.is_food = food_show
     # hotel_booking.is_transport = transportation_show
-
-
-
 
     # @api.depends('facilities_ids')
     # def _show_tab(self):

@@ -37,6 +37,15 @@
             </tree>
         </field>
     </record>
+<!--    ==================  Action of booked rooms ===============-->
+    <record id="action_booking_room" model="ir.actions.act_window">
+        <field name="name">Booked Rooms</field>
+        <field name="res_model">hotel.booking.room</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('booking_id', '=', active_id)]</field>
+<!--        <field name="context">{'search_default_booking_id':active_id}</field>-->
+<!--        <field name="context">{}</field>-->
+    </record>
 
     <!--    ======================= Form view of the food order ============== -->
     <record id="view_hotel_booking_food_lines_form" model="ir.ui.view">

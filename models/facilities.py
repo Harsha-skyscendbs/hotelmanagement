@@ -7,6 +7,7 @@ class Facilities(models.Model):
 
     code = fields.Char('code')
     name = fields.Char('Facility')
+    color = fields.Integer('Color')
 
 # class BookingFacilities(models.Model):
 #     _name = 'hotel.booking.facilities'

@@ -6,8 +6,8 @@
         <field name="model">hotel.booking</field>
         <field name="arch" type="xml">
             <form>
-            <!--E-5 Q-11 -->
-<!--            <form create="0" edit="0" delete="0">-->
+                <!--E-5 Q-11 -->
+                <!--            <form create="0" edit="0" delete="0">-->
                 <header>
                     <!--                    <h1>Bookings of STARLINE DIVINE!!</h1>-->
                     <field name="state" widget="statusbar" options="{'clickable':1}"/>
@@ -25,11 +25,14 @@
                     <!-- E-5 Q-12,13,14 -->
                     <widget name="web_ribbon" title="Not active" bg_color="bg-danger" invisible="active"/>
                     <widget name="web_ribbon" title="Active" bg_color="bg-success" invisible="not active"/>
-                    <widget name="web_ribbon" title="Other state" bg_color="bg-warning" invisible="state == 'checkin' or state not in ('draft','checkout','done')"/>
-                    <widget name="web_ribbon" title="Other state" bg_color="bg-warning" invisible="state == 'checkin' or state not in ('draft','checkout','done')"/>
-<!--                    <widget name="web_ribbon" title="Other state" bg_color="bg-warning" invisible="state == 'checkin'"/>-->
+                    <widget name="web_ribbon" title="Other state" bg_color="bg-warning"
+                            invisible="state == 'checkin' or state not in ('draft','checkout','done')"/>
+                    <widget name="web_ribbon" title="Other state" bg_color="bg-warning"
+                            invisible="state == 'checkin' or state not in ('draft','checkout','done')"/>
+                    <!--                    <widget name="web_ribbon" title="Other state" bg_color="bg-warning" invisible="state == 'checkin'"/>-->
                     <div class="row">
                         <div class="col col-md-6">
+                            <field name="image" widget="image" class="oe_avatar"/>
                             <h1>
                                 <group>
                                     <!--                                    <field name="hotel_ids"/>-->
@@ -47,6 +50,7 @@
                                 <field name="guest_gender" widget="radio"/>
                                 <field name="file_name" invisible="1"/>
                                 <field name="guest_id_doc" filename="file_name"/>
+                                <field name="color" widget="color_picker"/>
                                 <!--                                <field name="website" widget="url"/>-->
                                 <!--                                <field name="guest_priority" widget="priority"/>-->
                                 <!--                                <field name="sign_in" widget="float_time"/>-->
@@ -116,55 +120,57 @@
         <field name="name">view.hotel.booking.tree</field>
         <field name="model">hotel.booking</field>
         <field name="arch" type="xml">
-                <!--E-5 Q-4-->
+            <!--E-5 Q-4-->
             <tree>
-<!--            <tree editable="bottom" create="0"  delete="0">-->
+                <!--            <tree editable="bottom" create="0"  delete="0">-->
                 <!--E-5 Q-5 & Q-6 & Q-7 -->
-<!--            <tree editable="bottom" default_order="date_of_booking" multi_edit="1"-->
-<!--                    decoration-danger="active==False"-->
-<!--                    decoration-bf="state=='draft'"-->
-<!--                    decoration-info="state=='checkin'"-->
-<!--                    decoration-warning="state=='checkout'"-->
-<!--                    decoration-success="state=='done'">-->
+                <!--            <tree editable="bottom" default_order="date_of_booking" multi_edit="1"-->
+                <!--                    decoration-danger="active==False"-->
+                <!--                    decoration-bf="state=='draft'"-->
+                <!--                    decoration-info="state=='checkin'"-->
+                <!--                    decoration-warning="state=='checkout'"-->
+                <!--                    decoration-success="state=='done'">-->
                 <!--E-5 Q-3-->
-<!--            <tree editable="top">-->
+                <!--            <tree editable="top">-->
                 <field name="sequence" widget="handle"/>
                 <field name="booking_id"/>
                 <field name="guest_name"/>
+                <field name="color" widget="color_picker"/>
+
                 <!--E-5 Q-8-->
                 <field name="guest_email" optional="hide"/>
-                <field name="active" widget="boolean_toggle" optional="show" />
-<!--                <field name="date_of_booking" optional="show"/>-->
-<!--                <field name="check_in" optional="show"/>-->
-<!--                <field name="check_out"/>-->
-<!--                <field name="state" optional="show"/>-->
-<!--                <field name="mode_of_payment"/>-->
-<!--                <field name="facilities_ids" widget="many2many_tags" optional="hide"/>-->
-<!--                <field name ="booking_folio_ids" widget="many2many_tags" optional="hide"/>-->
-<!--                <field name="currency_id" optional="hide"/>-->
-<!--                &lt;!&ndash;E-5 Q-9&ndash;&gt;-->
-<!--                <field name="total" total="Total"/>-->
+                <field name="active" widget="boolean_toggle" optional="show"/>
+                <field name="date_of_booking" optional="show"/>
+                <field name="check_in" optional="show"/>
+                <field name="check_out"/>
+                <field name="state" optional="show"/>
+                <field name="facilities_ids" widget="many2many_tags" optional="hide" options="{'color_field':'color'}"/>
+                <field name="booking_folio_ids" widget="many2many_tags" optional="hide"/>
+                <field name="mode_of_payment"/>
+                <field name="currency_id" optional="hide"/>
+                <!--E-5 Q-10-->
+                <field name="total" avg="Avg of total"/>
             </tree>
         </field>
     </record>
     <!-- E-5 Q-15,16,17,18 -->
     <!-- =========== Calendar view of hotel booking in which record will be displayed only on a single day -->
-<!--    <record id="view_booking_calendar" model="ir.ui.view">-->
-<!--        <field name="name">view.booking.calendar</field>-->
-<!--        <field name="model">hotel.booking</field>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <calendar date_start="date_of_booking" mode="month">-->
-<!--                <field name="guest_name"/>-->
-<!--            </calendar>-->
-<!--        </field>-->
-<!--    </record>-->
+    <!--    <record id="view_booking_calendar" model="ir.ui.view">-->
+    <!--        <field name="name">view.booking.calendar</field>-->
+    <!--        <field name="model">hotel.booking</field>-->
+    <!--        <field name="arch" type="xml">-->
+    <!--            <calendar date_start="date_of_booking" mode="month">-->
+    <!--                <field name="guest_name"/>-->
+    <!--            </calendar>-->
+    <!--        </field>-->
+    <!--    </record>-->
     <!-- =========== Calendar view of hotel booking in which record will be displayed in multiple days -->
-     <record id="view_booking_calendar" model="ir.ui.view">
+    <record id="view_booking_calendar" model="ir.ui.view">
         <field name="name">view.booking.calendar</field>
         <field name="model">hotel.booking</field>
         <field name="arch" type="xml">
             <calendar date_start="check_in" date_stop="check_out" mode="month" color="guest_gender">
-<!--            <calendar date_start="check_in" date_stop="check_out" mode="day" color="guest_gender">-->
+                <!--            <calendar date_start="check_in" date_stop="check_out" mode="day" color="guest_gender">-->
                 <field name="guest_name"/>
                 <field name="guest_age"/>
             </calendar>
@@ -177,9 +183,9 @@
         <field name="name">view.booking.graph</field>
         <field name="model">hotel.booking</field>
         <field name="arch" type="xml">
-<!--            <graph type="bar" stacked="0">-->
-<!--            <graph type="bar">-->
-<!--            <graph type="line">-->
+            <!--            <graph type="bar" stacked="0">-->
+            <!--            <graph type="bar">-->
+            <!--            <graph type="line">-->
             <graph type="pie">
                 <field name="date_of_booking" string="Booking date"/>
                 <field name="days_book_for" string="Booking Days"/>
@@ -199,6 +205,66 @@
                 <field name="days_book_for" type="measure"/>
                 <field name="guest_age" type="measure"/>
             </pivot>
+        </field>
+    </record>
+    <!-- E-5 Q-27,28,29,30,31,32,33,34-->
+    <!--     Kanban view of bookings-->
+    <record id="view_booking_kanban" model="ir.ui.view">
+        <field name="name">view.booking.kanban</field>
+        <field name="model">hotel.booking</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="id"/>
+                <field name="color"/>
+                <!--                <field name="facilities_ids"/>-->
+                <templates>
+                    <t t-name="kanban-menu">
+<!--                        <a role="menuitem" type="open" class="dropdown-item">Open</a>-->
+                        <t t-if="widget.editable">
+                            <a role="menuitem" type="edit" class="dropdown-item">Edit</a>
+                        </t>
+                        <t t-if="widget.deletable">
+                            <a role="menuitem" type="delete" class="dropdown-item">Delete</a>
+                        </t>
+                        <div role="separator" class="dropdown-divider"/>
+                        <!-- Directly from action of the One2many field -->
+                        <a role="menuitem" type="action" name="%(action_booking_room)d" class="dropdown-item">
+                            Booked Rooms
+                        </a>
+                        <ul class="oe_kanban_colorpicker" data-field="color"/>
+                    </t>
+                    <t t-name="kanban-box">
+
+                        <div t-attf-class="#{!selection_mode ? kanban_color(record.color.raw_value) : ''} oe_kanban_card oe_kanban_color oe_kanban_global_click">
+                            <div class="o_kanban_image">
+                                <img t-att-src="kanban_image('hotel.booking','image',record.id.raw_value)"
+                                     alt="Avatar"/>
+                            </div>
+                            <div class="o_kanban_card_header">
+                                <div class="o_kanban_card_header_title mb-3">
+                                    <h3>
+                                        <field name="guest_name"/>
+                                    </h3>
+                                    <b>Booking Date:</b>
+                                    <field name="date_of_booking"/>
+                                    <br/>
+                                    <b>No of days:</b>
+                                    <field name="days_book_for"/>
+                                </div>
+                                <br/>
+                                <b>Check In:</b>
+                                <field name="check_in"/>
+                                <br/>
+                                <b>Check Out:</b>
+                                <field name="check_out"/>
+                                <br/>
+                                <b>Facilities:</b>
+                                <field name="facilities_ids" widget="many2many_tags" options="{'color_field':'color'}"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
         </field>
     </record>
 
@@ -228,14 +294,16 @@
                 <filter name="grp_by_booking_date" string="Booking Date" context="{'group_by':'date_of_booking'}"/>
                 <filter name="grp_by_mode_of_payment" string="Mode of Payment"
                         context="{'group_by':'mode_of_payment'}"/>
+                <filter name="grp_by_state" string="Booking Status" context="{'group_by':'state'}"/>
             </search>
         </field>
     </record>
     <record id="action_hotel" model="ir.actions.act_window">
         <field name="name">Bookings</field>
         <field name="res_model">hotel.booking</field>
-        <field name="view_mode">tree,form,calendar,graph,pivot</field>
-        <field name="context">{'search_default_state':'checkin','search_default_fil_date_of_booking':'5/7/2024'}</field>
+        <field name="view_mode">kanban,tree,form,calendar,graph,pivot</field>
+        <!--        <field name="context">{'search_default_state':'checkin','search_default_fil_date_of_booking':'5/7/2024'}</field>-->
+        <field name="context">{'search_default_grp_by_state':'checkin'}</field>
     </record>
     <menuitem id="menu_hotel" name="Hotel Management"/>
     <menuitem id="menu_booking" name="Reservation" parent="menu_hotel"/>

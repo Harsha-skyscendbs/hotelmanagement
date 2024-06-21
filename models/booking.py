@@ -2,6 +2,7 @@ import datetime
 
 from odoo import models, fields, api, Command,_
 from datetime import timedelta
+from odoo.exceptions import ValidationError
 
 
 class Hotel(models.Model):
@@ -13,6 +14,8 @@ class Hotel(models.Model):
     company_id = fields.Many2one('res.company', 'Hotel', default=lambda self: self.env.company)
     booking_id = fields.Char(string="Booking Id", required=True, help='This is used to enter booking id',
                              index=True, default=lambda self: _('New'))
+    image = fields.Image('Guest Image')
+    color = fields.Integer('Color')
     guest_name = fields.Char(string="Guest Name", help='It is used to enter guest name', index=True)
     guest_email = fields.Char(string="Guest Email", help="You can enter guest's email id")
     guest_age = fields.Integer(string='Guest Age', help='Enter the age of the guest')
@@ -347,6 +350,29 @@ class Hotel(models.Model):
                 'hotel.booking') or 'New'
         res = super(Hotel, self).create(vals)
         return res
+
+    def unlink(self):
+        """
+        Overridden unlink method which checks if rooms been allocated then it wont delete the record of client
+        ------------------------------------------------------------------------------------------------------
+        @param self:object pointer / recordset
+        """
+        if self.booking_folio_ids:
+            raise ValidationError("You can not delete the records of client whose rooms been allocated")
+        return super().unlink()
+
+    def copy(self, default=None):
+        """
+        Overridden copy() method to add copy in name
+        --------------------------------------------
+        @param self: recordset
+        @param default: Dictionary containing fields to update while duplicating
+        """
+        default = {
+            'guest_name': self.guest_name + '- Copy'
+        }
+
+        return super().copy(default=default)
 
     def action_button(self):
         """

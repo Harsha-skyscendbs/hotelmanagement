@@ -20,6 +20,7 @@
                     <button name="copy_rec" string="Copy" type="object" class="oe_highlight"/>
                     <button name="delete_rec" string="Delete" type="object" class="oe_highlight"/>
                     <button name="search_rec" string="Search" type="object" class="oe_highlight"/>
+                    <button name="%(action_update_fac_wiz_button)d" class="oe_highlight" string="Update Facilities" type="action"/>
                 </header>
                 <sheet>
                     <!-- E-5 Q-12,13,14 -->
@@ -66,7 +67,7 @@
                                 <field name="check_in"/>
                                 <field name="check_out"/>
                                 <!--                                <field name="room_type_ids" widget="many2many_tags"/>-->
-                                <field name="facilities_ids" widget="many2many_checkboxes"/>
+                                <field name="facilities_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
                                 <field name="is_food" invisible="0"/>
                                 <field name="is_transport" invisible="0"/>
                             </group>
@@ -241,7 +242,7 @@
                                      alt="Avatar"/>
                             </div>
                             <div class="o_kanban_card_header">
-                                <div class="o_kanban_card_header_title mb-3">
+                                <div class="o_kanban_card_header_title mb-2">
                                     <h3>
                                         <field name="guest_name"/>
                                     </h3>

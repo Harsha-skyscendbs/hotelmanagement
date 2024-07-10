@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<!--    ================ Form view of wizard ===============-->
+    <record id="view_update_bookings_fac_wiz_form" model="ir.ui.view">
+        <field name="name">view.update.bookings.fac.wiz.form</field>
+        <field name="model">update.booking.facilities.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="bookings_id"/>
+                    <field name="facility_ids" widget="many2many_tags"/>
+                </group>
+                <footer>
+                    <button name="update_bookings_facilities" string="Update" type="object" class="btn btn-primary"/>
+                    <button special="cancel" string="Close" class="btn btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+<!--    ==================== Action of wizard to be called from menu==========-->
+    <record id="action_update_fac_wiz" model="ir.actions.act_window">
+        <field name="name">Update Facilities</field>
+        <field name="res_model">update.booking.facilities.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+<!--    ================== Menu to call update facilities wizard========-->
+<menuitem id="menu_update_fac_wiz" action="action_update_fac_wiz" parent="menu_configuration"/>
+
+    <!--    ================ Form view of wizard for button and action toolbar ===============-->
+    <record id="view_update_bookings_fac_wiz_form2" model="ir.ui.view">
+        <field name="name">view.update.bookings.fac.wiz.form2</field>
+        <field name="model">update.booking.facilities.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="facility_ids" widget="many2many_tags"/>
+                </group>
+                <footer>
+                    <button name="update_bookings_facilities" string="Update" type="object" class="btn btn-primary"/>
+                    <button special="cancel" string="Close" class="btn btn-primary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <!--    ==================== Action of wizard to be called from button==========-->
+    <record id="action_update_fac_wiz_button" model="ir.actions.act_window">
+        <field name="name">Update Facilities</field>
+        <field name="res_model">update.booking.facilities.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'form_view_ref':'hotelmanagement.view_update_bookings_fac_wiz_form2'}</field>
+    </record>
+    <!--    ==================== Action of wizard to be called from action toolbar ==========-->
+    <record id="action_update_fac_wiz_action_toolbar" model="ir.actions.act_window">
+        <field name="name">Update Facilities</field>
+        <field name="res_model">update.booking.facilities.wizard</field>
+        <field name="binding_model_id" ref="hotelmanagement.model_hotel_booking"/>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'form_view_ref':'hotelmanagement.view_update_bookings_fac_wiz_form2'}</field>
+    </record>
+</odoo>

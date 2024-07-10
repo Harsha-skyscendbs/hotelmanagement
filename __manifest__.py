@@ -8,6 +8,7 @@
     'data': [
              'security/hotel_security.xml',
              'security/ir.model.access.csv',
+             'wizard/update_booking_facilities_view.xml',
              'views/room_view.xml',
              'views/booking_view.xml',
              'views/booking_tab_lines_view.xml',

@@ -1,0 +1,1 @@
+from . import update_booking_facilities_wiz

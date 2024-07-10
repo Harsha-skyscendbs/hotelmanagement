@@ -224,9 +224,9 @@ class Hotel(models.Model):
         print("\n Booking folio ids-------", booking_dict[0]['booking_folio_ids'])
         bookings = self.browse([1, 18])
         print("Bookings-----", bookings)
-        facilities_mapped = self.env['hotel.facilities'].browse([3, 2]).mapped('name')
+        facilities_mapped = self.env['hotel.facilities'].browse([3, 4]).mapped('name')
         print('facilities_mapped----', facilities_mapped)
-        facilities = self.env['hotel.facilities'].browse([3, 2]).read(['code', 'name'])
+        facilities = self.env['hotel.facilities'].browse([3, 4]).read(['code', 'name'])
         print('facilities_read----', facilities)
 
     def update_rec(self):

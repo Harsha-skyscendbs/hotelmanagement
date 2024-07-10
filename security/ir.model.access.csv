@@ -31,3 +31,5 @@ access_hotel_vehicle_facilty_staff,access.hotel.vehicle.facilty.staff,model_hote
 access_hotel_facilities_manager,access.hotel.facilities.manager,model_hotel_facilities,group_hotel_manager,1,1,1,1
 access_hotel_facilities_staff,access.hotel.facilities.staff,model_hotel_facilities,group_hotel_staff,1,1,0,0
 
+access_hotel_update_fac_wiz_manager,access.hotel.update.fac.wiz.manager,model_update_booking_facilities_wizard,group_hotel_manager,1,1,1,1
+access_hotel_update_fac_wiz_staff,access.hotel.update.fac.wiz.staff,model_update_booking_facilities_wizard,group_hotel_staff,1,1,0,0
